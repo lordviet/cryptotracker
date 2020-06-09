@@ -1,42 +1,76 @@
 import React from 'react';
 import { Text, View, StyleSheet } from 'react-native';
+import PercentChange from './PercentChange';
 
 export default function Crypto({ name, symbol, priceUsd, percentChange24h, percentChange7d }) {
     return (
-        <View>
+        <View style={coinCard}>
             <View style={coinInfoRow}>
-                <Text style={coinSymbol}>{symbol}</Text>
-                <Text style={seperator}>|</Text>
-                <Text style={coinName}>{name}</Text>
+                <Text style={coinName}>{name} ({symbol})</Text>
+                <Text style={coinPrice}>
+                    {priceUsd.toFixed(2)}
+                    <Text style={usdSymbol}>$</Text>
+                </Text>
             </View>
-            <Text>{priceUsd}</Text>
-            <Text>{percentChange24h} {percentChange7d}</Text>
+            <View style={percentChangeRow}>
+                <PercentChange percentChange={percentChange24h} timeMark='24h' />
+                <PercentChange percentChange={percentChange7d} timeMark='7d' />
+            </View>
         </View>
     );
 }
 
 const styles = StyleSheet.create({
-    coinInfoRow:{
+    coinCard: {
         display: "flex",
-        flexDirection: "row",
+        marginBottom: 20,
+        borderBottomColor: "#e3e3e3",
+        borderBottomWidth: 3,
+        padding: 20
+    },
+    coinInfoRow: {
+        display: 'flex',
+        flexDirection: 'row',
+        justifyContent: 'space-between',
         marginBottom: 15
     },
     coinSymbol: {
         marginTop: 10,
         marginLeft: 5,
-        marginRight: 5,
-        fontWeight: "bold",
-    },
-    seperator: {
-        marginTop: 10,
+        marginRight: 20,
+        fontWeight: 'bold',
     },
     coinName: {
         marginTop: 10,
         marginLeft: 5,
-        marginRight: 5
+        marginRight: 20,
+        fontWeight: 'bold'
     },
-    coinPrice: {},
-    // Percent change + green and - red 
+    coinPrice: {
+        marginTop: 10,
+        marginLeft: 5,
+        marginRight: 20
+    },
+    usdSymbol: {
+        marginLeft: 5,
+        fontWeight: 'bold'
+    },
+    percentChangeRow: {
+        display: 'flex',
+        flexDirection: 'row',
+        justifyContent: 'space-around',
+        borderTopColor: '#f3f3f3',
+        borderTopWidth: 2,
+        padding: 10
+    }
 });
 
-const { coinInfoRow, coinSymbol, seperator, coinName, coinPrice } = styles;
+const {
+    coinCard,
+    coinInfoRow,
+    coinSymbol,
+    coinName,
+    coinPrice,
+    usdSymbol,
+    percentChangeRow
+} = styles;
