@@ -37,8 +37,8 @@ export default function Cryptos() {
 const styles = StyleSheet.create({
     cryptosContainer: {
         display: "flex",
-        marginTop: 60,
-        alignItems: "center",
+        marginTop: 30,
+        marginBottom: 30,
     },
 })
 
